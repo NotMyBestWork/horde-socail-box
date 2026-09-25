@@ -30,7 +30,7 @@ describe('Tweet', () => {
       '/avatars/avatar-1.svg',
     );
     expect(screen.getByRole('button', { name: 'Reply (5)' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Retweet (10)' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Rally \(10\)/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Like (42)' })).toBeInTheDocument();
   });
 
@@ -50,7 +50,7 @@ describe('Tweet', () => {
     );
 
     await user.click(screen.getByRole('button', { name: 'Reply (5)' }));
-    await user.click(screen.getByRole('button', { name: 'Retweet (10)' }));
+    await user.click(screen.getByRole('button', { name: /Rally \(10\)/ }));
     await user.click(screen.getByRole('button', { name: 'Like (42)' }));
 
     expect(onReply).toHaveBeenCalledWith('tweet-1');
@@ -62,7 +62,7 @@ describe('Tweet', () => {
     render(<Tweet tweet={{ ...tweet, likedByMe: true, retweetedByMe: true }} />);
 
     expect(screen.getByRole('button', { name: 'Liked (42)' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByRole('button', { name: 'Retweeted (10)' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: /Rallied \(10\)/ })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('does not require action handlers', async () => {

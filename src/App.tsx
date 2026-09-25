@@ -34,16 +34,37 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <h1>Tweet Viewer</h1>
-      {tweets.map((tweet) => (
-        <Tweet
-          key={tweet.id}
-          tweet={tweet}
-          onLike={toggleLike}
-          onRetweet={toggleRetweet}
-        />
-      ))}
+    <div className="app-shell">
+      <header className="app-header">
+        <div className="brand-lockup">
+          <span className="brand-mark" aria-hidden="true">⚔</span>
+          <div>
+            <p className="eyebrow">ASHEN HOLLOW · WAR ROOM</p>
+            <h1>Horde Feed</h1>
+          </div>
+        </div>
+        <span className="feed-status"><span aria-hidden="true" />Warband awake</span>
+      </header>
+
+      <main className="feed-panel" aria-label="Horde feed">
+        <div className="feed-heading">
+          <div>
+            <p className="eyebrow">MESSENGER'S BOARD</p>
+            <h2>From the warband</h2>
+          </div>
+          <span className="dispatch-label">Latest dispatches</span>
+        </div>
+        <section className="tweet-list" aria-label="Latest warband dispatches">
+          {tweets.map((tweet) => (
+            <Tweet
+              key={tweet.id}
+              tweet={tweet}
+              onLike={toggleLike}
+              onRetweet={toggleRetweet}
+            />
+          ))}
+        </section>
+      </main>
     </div>
   );
 }

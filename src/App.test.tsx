@@ -7,7 +7,7 @@ describe('App', () => {
   it('renders the tweet viewer with sample tweets', () => {
     render(<App />);
 
-    expect(screen.getByRole('heading', { name: 'Tweet Viewer' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Horde Feed' })).toBeInTheDocument();
     expect(screen.getAllByRole('article').length).toBeGreaterThan(0);
   });
 
@@ -19,7 +19,7 @@ describe('App', () => {
     try {
       await import('./main');
 
-      expect(await screen.findByRole('heading', { name: 'Tweet Viewer' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { name: 'Horde Feed' })).toBeInTheDocument();
     } finally {
       root.remove();
     }
@@ -40,11 +40,11 @@ describe('App', () => {
     const user = userEvent.setup();
     render(<App />);
 
-    await user.click(screen.getByRole('button', { name: 'Retweet (10)' }));
-    expect(screen.getByRole('button', { name: 'Retweeted (11)' })).toHaveAttribute('aria-pressed', 'true');
+    await user.click(screen.getByRole('button', { name: /Rally \(10\)/ }));
+    expect(screen.getByRole('button', { name: /Rallied \(11\)/ })).toHaveAttribute('aria-pressed', 'true');
 
-    await user.click(screen.getByRole('button', { name: 'Retweeted (11)' }));
-    expect(screen.getByRole('button', { name: 'Retweet (10)' })).toHaveAttribute('aria-pressed', 'false');
+    await user.click(screen.getByRole('button', { name: /Rallied \(11\)/ }));
+    expect(screen.getByRole('button', { name: /Rally \(10\)/ })).toHaveAttribute('aria-pressed', 'false');
   });
 
   it('only affects the clicked tweet', async () => {
